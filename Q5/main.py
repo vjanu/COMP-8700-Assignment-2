@@ -1,3 +1,5 @@
+#COMP-8700
+#Assignment-2
 from statistics import mean, stdev
 from random import choice
 

@@ -1,3 +1,6 @@
+#COMP-8700
+#Assignment-2
+
 from Constants import Direction
 
 MAX_M = 30

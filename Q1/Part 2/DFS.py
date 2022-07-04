@@ -1,3 +1,5 @@
+#COMP-8700
+#Assignment-2
 import sys
 from Rounds import problem_state
 

@@ -1,3 +1,5 @@
+#COMP-8700
+#Assignment-2
 class Direction:
 	LEFT_TO_RIGHT = 1
 	RIGHT_TO_LEFT = 0

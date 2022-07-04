@@ -1,3 +1,5 @@
+#COMP-8700
+#Assignment-2
 from Rounds import problem_state
 import time
 

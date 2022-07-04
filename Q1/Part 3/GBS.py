@@ -1,4 +1,5 @@
-
+#COMP-8700
+#Assignment-2
 from queue import PriorityQueue
 total_player = 0
 
