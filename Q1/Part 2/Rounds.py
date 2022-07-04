@@ -33,9 +33,9 @@ class State(object):
 			CAP_BOAT = CONSTS.CAP_BOAT
 
 	def successors(self):
-		listChild = []
+		listSuccessor = []
 		if not self.isValid() or self.isGoalState():
-			return listChild
+			return listSuccessor
 		if self.dir == Direction.LEFT_TO_RIGHT:
 			sgn = -1
 			direction = "from the left side to the right side"
@@ -44,16 +44,16 @@ class State(object):
 			direction = "back from the left side to the right side"
 		for i in self.moves:
 			(m, c) = i
-			self.addValidSuccessors(listChild, m, c, sgn, direction)
-		return listChild
+			self.addValidSuccessors(listSuccessor, m, c, sgn, direction)
+		return listSuccessor
 
-	def addValidSuccessors(self, listChild, m, c, sgn, direction):
+	def addValidSuccessors(self, listSuccessor, m, c, sgn, direction):
 		newState = State(self.missionaries + sgn * m, self.cannibals + sgn * c, self.dir + sgn * 1,
 							self.missionariesPassed - sgn * m, self.cannibalsPassed - sgn * c, self.level + 1,
 							self.CONSTANTS,self.moves)
 		if newState.isValid():
 			newState.action = " Bring %d missionaries and %d cannibals %s." % (m, c, direction)
-			listChild.append(newState)
+			listSuccessor.append(newState)
 
 	def isValid(self):
 		

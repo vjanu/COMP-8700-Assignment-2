@@ -46,25 +46,25 @@ def calculate_avg_pathcost(result_list, key):
     return {'mean': mean(results), 'sd': stdev(results)}
 
 def print_results(results):
-    title_col_width = 30
-    data_col_width = 15
+    column_width = 30
+    column_width_data = 15
 
     def print_data_row(row_title, data_string, data_func, results):
-        nonlocal title_col_width, data_col_width
-        row = (row_title + '\t').rjust(title_col_width)
+        nonlocal column_width, column_width_data
+        row = (row_title + '\t').rjust(column_width)
         result_groups = iter(results)
         next(result_groups)
         for result_group in result_groups:
-            row += data_string.format(**data_func(result_group)).ljust(data_col_width)
+            row += data_string.format(**data_func(result_group)).ljust(column_width_data)
         print(row)
 
 
 
     num_iterations = len(results[0])
 
-    print('\t'.rjust(title_col_width) +
-          'Successes'.ljust(data_col_width) +
-          'Failures'.ljust(data_col_width))
+    print('\t'.rjust(column_width) +
+          'Successes'.ljust(column_width_data) +
+          'Failures'.ljust(column_width_data))
 
     print_data_row('Success/Failure Rate:',
                    '{percent:.1%}',
@@ -76,30 +76,24 @@ def print_results(results):
                    lambda x: calculate_avg_pathcost(x, 'path_length'),
                    results)
 
-def print_Random_Search_results(results, Avg_restarts):
-    title_col_width = 30
-    data_col_width = 15
+def execute_Random_Search(results, Avg_restarts):
+    column_width = 30
+    column_width_data = 15
 
     def print_data_row(row_title, data_string, data_func, results):
-        nonlocal title_col_width, data_col_width
-        row = (row_title + '\t').rjust(title_col_width)
+        nonlocal column_width, column_width_data
+        row = (row_title + '\t').rjust(column_width)
         result_groups = iter(results)
         next(result_groups)
         for result_group in result_groups:
-            row += data_string.format(**data_func(result_group)).ljust(data_col_width)
+            row += data_string.format(**data_func(result_group)).ljust(column_width_data)
         print(row)
-
-    def print_random_restart_data(row_title, avg):
-        nonlocal title_col_width, data_col_width
-        row = (row_title + '\t').rjust(title_col_width) + str(avg)
-        print(row)
-
 
     num_iterations = len(results[0])
 
-    print('\t'.rjust(title_col_width) +
-          'Successes'.ljust(data_col_width) +
-          'Failures'.ljust(data_col_width))
+    print('\t'.rjust(column_width) +
+          'Successes'.ljust(column_width_data) +
+          'Failures'.ljust(column_width_data))
 
     print_data_row('Success/Failure Rate:',
                    '{percent:.1%}',
@@ -127,7 +121,7 @@ def execute_algorithm(problem_set, search_function):
         for result in results[0]:
             ran_restarts.append(result['NoRestarts'])
         Avg_restarts = mean(ran_restarts)
-        print_Random_Search_results(results, Avg_restarts)
+        execute_Random_Search(results, Avg_restarts)
     else:
         print_results(results)
 

@@ -82,7 +82,7 @@ node = checked[-1]
 parent = node[3]
 path.append(node)
 if parent == -1:
-    print('Unsolvable')
+    print('Optimal path cannot be found')
 else:
     while parent != -1:
         node = checked[parent]

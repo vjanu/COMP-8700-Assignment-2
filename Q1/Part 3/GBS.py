@@ -1,6 +1,5 @@
 
 from queue import PriorityQueue
-infinity = float('inf')
 total_player = 0
 
 
@@ -14,7 +13,7 @@ def trace_path(goal):
     path.append(node)
     while path:
         print(path.pop().state)
-    print("-----------------------\n")
+    print("\n")
 
 
 class Problem(object):
@@ -30,12 +29,12 @@ class Problem(object):
             if(state[0] >= 2):
                 if ((state[1] <= (state[0]-2)) or state[0] == 2) and (state[3] <= (state[2]+2)):
                     ans.append([state[0] - 2, state[1], state[2]+2, state[3], 'R'])
-            if(state[0] >= 1):
-                if ((state[1] <= (state[0]-1)) or state[0] == 1) and (state[3] <= (state[2]+1)):
-                    ans.append([state[0] - 1, state[1], state[2]+1, state[3], 'R'])
             if(state[1] >= 2):
                 if ((state[2] >= (state[3] +2)) or state[2] == 0):
                     ans.append([state[0], state[1]-2, state[2], state[3]+2, 'R'])
+            if(state[0] >= 1):
+                if ((state[1] <= (state[0]-1)) or state[0] == 1) and (state[3] <= (state[2]+1)):
+                    ans.append([state[0] - 1, state[1], state[2]+1, state[3], 'R'])
             if(state[1] >= 1):
                 if (state[2] >= (state[3] +1)) or state[2] == 0:
                     ans.append([state[0], state[1]-1, state[2], state[3]+1, 'R'])
@@ -45,12 +44,12 @@ class Problem(object):
             if(state[2] >= 2):
                 if (state[3] <= (state[2]-2) or state[2] == 2) and (state[1] <= (state[0]+2)):
                     ans.append([state[0] + 2, state[1], state[2]-2, state[3], 'L'])
-            if(state[2] >= 1):
-                if (state[3] <= (state[2]-1) or state[2] == 1) and (state[1] <= (state[0]+1)):
-                    ans.append([state[0] + 1, state[1], state[2]-1, state[3], 'L'])
             if(state[3] >= 2):
                 if state[0] >= (state[1] +2) or state[0] == 0:
                     ans.append([state[0], state[1]+2, state[2], state[3]-2, 'L'])
+            if(state[2] >= 1):
+                if (state[3] <= (state[2]-1) or state[2] == 1) and (state[1] <= (state[0]+1)):
+                    ans.append([state[0] + 1, state[1], state[2]-1, state[3], 'L'])
             if(state[3] >= 1):
                 if state[0] >= (state[1] +1) or state[0] == 0:
                     ans.append([state[0], state[1]+1, state[2], state[3]-1, 'L'])
@@ -59,30 +58,23 @@ class Problem(object):
 
         return ans
 
-
-
     def result(self, state, action):
-
         return action
 
     def goal_test(self, state):
-
         if isinstance(self.goal, list):
             return state == self.goal
 
     def path_cost(self, c, state1, action, state2):
-
         return c + 1
 
     def value(self, state):
-
         raise NotImplementedError
 
 
 class Node:
 
     def __init__(self, state, parent=None, action=None, path_cost=0):
-        
         self.state = state
         self.parent = parent
         self.action = action
@@ -135,7 +127,6 @@ def memoize(f):
     return memf
 
 def best_first_graph_search(problem, f):
-
     f = memoize(f)
     node = Node(problem.initial)
     frontier = PriorityQueue(f)
@@ -159,7 +150,7 @@ def best_first_graph_search(problem, f):
         for e in frontier.heap:
             val, node = e
             temp_front.append(node.state)
-        print("Frontier Nodes:", temp_front)
+        print("Separation Nodes:", temp_front)
         print("\n")
     return None
 
@@ -177,6 +168,6 @@ if __name__ == "__main__":
     cannibal_count = 3
     total_player = missionary_count + cannibal_count
 
-    print("Greedy best first search:")
+    print("Greedy Best First Search Algorithm:")
     greedy_best_first_graph_search(Problem([missionary_count,cannibal_count, 0, 0, 'L'], [0,0, missionary_count,cannibal_count,'R']), heuristic)
 
